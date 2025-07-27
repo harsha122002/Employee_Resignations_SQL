@@ -1,0 +1,43 @@
+CREATE TABLE EmployeeResignations (
+ EmployeeID INT PRIMARY KEY,
+ Name VARCHAR(100),
+ Gender VARCHAR(10),
+ Age INT,
+ Department VARCHAR(50),
+ JobRole VARCHAR(50),
+ DateOfJoining DATE,
+ DateOfExit DATE,
+ PerformanceRating INT,
+ ResignationReason VARCHAR(100),
+ LastWorkingLocation VARCHAR(50)
+);
+select  * from  EmployeeResignations;
+SELECT Department, JobRole, COUNT(*) AS ResignationCount
+FROM EmployeeResignations
+GROUP BY Department, JobRole
+ORDER BY ResignationCount DESC;
+
+SELECT
+ AVG(Age) AS AvgAge,
+ AVG(DATEDIFF(DateOfExit, DateOfJoining)/365.25) AS AvgTenure
+FROM EmployeeResignations;
+
+SELECT YEAR(DateOfExit) AS ExitYear, COUNT(*) AS Resignations
+FROM EmployeeResignations
+GROUP BY YEAR(DateOfExit)
+ORDER BY ExitYear;
+
+SELECT ResignationReason, COUNT(*) AS Count
+FROM EmployeeResignations
+GROUP BY ResignationReason
+ORDER BY Count DESC;
+
+SELECT Department, Gender, COUNT(*) AS ResignationCount
+FROM EmployeeResignations
+GROUP BY Department, Gender
+ORDER BY Department, Gender;
+
+SELECT PerformanceRating, COUNT(*) AS EmployeesExited
+FROM EmployeeResignations
+GROUP BY PerformanceRating
+ORDER BY PerformanceRating;
